@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Listado de Datos Generales Edicion</title>
+    <!-- Agregar enlaces a los archivos CSS y JS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <br><br>
+
+    <h1 class="text-center fw-bolder">Listado de Datos Generales Cr</h1>
+
+    <br>
+    <div class="container">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Apellidos</th>
+                        <th>Nombres</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{ item['dni'] }}</td>
+                        <td>{{ item['apellidos'] }}</td>
+                        <td>{{ item['nombres'] }}</td>
+                        <td>{{ item['fecha_nacimiento'] }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_datos_generales', dni=item['dni']) }}"
+                                class="btn btn-primary">Editar</a>
+                            <form action="{{ url_for('delete_datos_generales', dni=item['dni']) }}" method="post"
+                                style="display:inline;">
+                                <input type="submit" value="Eliminar" class="btn btn-danger"
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a href="{{ url_for('add_datos_generales') }}" class="btn btn-success">Agregar Nuevo Registro</a>
+                <br><br>
+                <a href="http://localhost:5000/" class="btn btn-warning">Menú Inicial</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Enlace directo a la URL 
+    <a href="http://localhost:5000/">Menu inicial</a>  -->
+
+    <!-- Enlace directo usando una ruta relativa -->
+    <!--<a href="/">Menu inicial no funciona / </a> -->
+
+    <!-- Usando url_for para generar la URL para la función 'inicio'  -->
+
+    <!-- Redirección Directa en la Función de Vista :Para hacer algo antes de salir probada:-->
+    <!--<a href="{{ url_for('rindex') }}">Menu inicial rindex </a> -->
+
+
+</body>
+
+</html>

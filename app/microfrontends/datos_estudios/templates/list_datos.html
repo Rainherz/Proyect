@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listado de Datos Estudio Edicion</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <br><br>
+
+    <h1 class="text-center fw-bolder">Listado de Datos Estudios</h1>
+
+    <br>
+    <div class="container">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Estudio</th>
+                        <th>Entidad</th>
+                        <th>Fecha de Termino</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                        <tr>
+                            <td>{{ item['dni'] }}</td>
+                            <td>{{ item['estudio'] }}</td>
+                            <td>{{ item['entidad'] }}</td>
+                            <td>{{ item['fecha_termino'] }}</td>
+                            <td>
+                                
+                                <a href="{{ url_for('edit_datos_estudios', dni=item['dni']) }}" class="btn btn-primary">Editar</a>
+                                <form action="{{ url_for('delete_datos_estudios', dni=item['dni']) }}" method="post" style="display:inline;">
+                                    <input type="submit" value="Eliminar" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a href="{{ url_for('add_datos_estudios') }}" class="btn btn-success">Agregar Nuevo Registro</a>
+                <br><br>
+                <a href="http://localhost:5000/" class="btn btn-warning">Menú Inicial</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
